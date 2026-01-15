@@ -123,14 +123,7 @@ button {
 </style>
 </head>
 
-<body>
-
-<div class="sun"></div>
-
-<div class="sugarcane left">🌾🌾🌾🌾🌾🌾</div>
-<div class="sugarcane right">🌾🌾🌾🌾🌾🌾</div>
-
-<audio id="music" loop>
+<audio id="music" preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -160,21 +153,16 @@ const card = document.getElementById("card");
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
-  music.volume = 0;
-  music.play();
-  card.classList.add("glow");
+  try {
+    music.volume = 0.5;     // set volume first
+    music.currentTime = 0; // reset
+    music.play();           // MUST be direct
 
-  let vol = 0;
-  const fade = setInterval(() => {
-    if (vol < 0.5) {
-      vol += 0.05;
-      music.volume = vol;
-    } else {
-      clearInterval(fade);
-    }
-  }, 200);
-
-  btn.style.display = "none";
+    card.classList.add("glow");
+    btn.style.display = "none";
+  } catch (e) {
+    alert("Tap again to allow music");
+  }
 });
 </script>
 
