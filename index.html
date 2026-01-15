@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Pongal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ---------- GLOBAL ---------- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fff7d6;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Kolam background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20px 20px, rgba(180,120,0,0.18) 2px, transparent 2px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* ---------- SUN ---------- */
+.sun {
+  position: fixed;
+  bottom: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(circle, #ffd700, #ff9800);
+  border-radius: 50%;
+  animation: rise 4s ease-out forwards;
+  z-index: -1;
+}
+
+@keyframes rise {
+  to { bottom: 65%; }
+}
+
+/* ---------- SUGARCANE ---------- */
+.sugarcane {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  font-size: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  animation: sway 3s ease-in-out infinite alternate;
+}
+
+.left { left: 8px; transform-origin: bottom; }
+.right { right: 8px; transform-origin: bottom; }
+
+@keyframes sway {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(2deg); }
+}
+
+/* ---------- CARD ---------- */
+.card {
+  background: white;
+  max-width: 360px;
+  margin: 120px auto;
+  padding: 30px;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  animation: fadeUp 1.5s ease;
+  transition: box-shadow 1s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card.glow {
+  box-shadow: 0 0 40px rgba(255, 180, 0, 0.8),
+              0 0 80px rgba(255, 140, 0, 0.6);
+}
+
+h1 {
+  color: #b30000;
+}
+
+/* ---------- POT ---------- */
+.pot-container {
+  position: relative;
+  margin-top: 30px;
+}
+
+/* Mango leaves */
+.leaves {
+  font-size: 26px;
+  margin-bottom: -10px;
+}
+
+/* Clay pot */
+.pot {
+  width: 170px;
+  height: 130px;
+  background: linear-gradient(#b45a1b, #7a3a0c);
+  border-radius: 0 0 85px 85px;
+  margin: auto;
+  position: relative;
+  box-shadow: inset 0 -6px 0 rgba(0,0,0,0.25);
+}
+
+/* Pot mouth */
+.pot::before {
+  content: "";
+  position: absolute;
+  top: -26px;
+  left: -12px;
+  width: 194px;
+  height: 42px;
+  background: #c96a2b;
+  border-radius: 50%;
+  border: 3px solid #8b4513;
+}
+
+/* Decorative bands */
+.decor {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ffd700,
+    #ffd700 6px,
+    #b30000 6px,
+    #b30000 12px
+  );
+}
+
+.decor1 { top: 35px; }
+.decor2 { top: 60px; }
+.decor3 { top: 85px; }
+
+/* Milk */
+.milk {
+  position: absolute;
+  top: -42px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  animation: boil 1.3s infinite ease-in-out;
+  z-index: 2;
+}
+
+@keyframes boil {
+  0% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -14px); }
+  100% { transform: translate(-50%, 0); }
+}
+
+/* ---------- FIRE ---------- */
+.fire {
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+}
+
+.flame {
+  width: 16px;
+  height: 28px;
+  background: radial-gradient(circle, #ffd700, #ff4500);
+  border-radius: 50% 50% 50% 50%;
+  margin: 0 4px;
+  animation: flicker 0.6s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scaleY(0.9); opacity: 0.7; }
+  to { transform: scaleY(1.2); opacity: 1; }
+}
+
+/* ---------- BUTTON ---------- */
+button {
+  margin-top: 22px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 18px;
+  color: #6b3b00;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sun -->
+<div class="sun"></div>
+
+<!-- Sugarcane -->
+<div class="sugarcane left">🌾🌾🌾🌾🌾🌾</div>
+<div class="sugarcane right">🌾🌾🌾🌾🌾🌾</div>
+
+<!-- Music -->
+<audio id="pongalMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Card -->
+<div class="card" id="card">
+  <h1>🌸 Happy Pongal Rithish ✨</h1>
+
+  <p>
+    May this Pongal bring prosperity,<br>
+    warmth, and new beginnings.<br><br>
+    Let happiness overflow just like Pongal 🌾
+  </p>
+
+  <div class="pot-container">
+    <div class="leaves">🍃🍃🍃🍃🍃</div>
+    <div class="milk"></div>
+
+    <div class="pot">
+      <div class="decor decor1"></div>
+      <div class="decor decor2"></div>
+      <div class="decor decor3"></div>
+    </div>
+
+    <div class="fire">
+      <div class="flame"></div>
+      <div class="flame"></div>
+      <div class="flame"></div>
+    </div>
+  </div>
+
+  <button onclick="playMusic()">🎶 Play Pongal Music</button>
+
+  <div class="footer">
+    🌞 Thai Pirandhal Vazhi Pirakkum 🌞
+  </div>
+</div>
+
+<script>
+function playMusic() {
+  const music = document.getElementById("pongalMusic");
+  const card = document.getElementById("card");
+
+  music.volume = 0;
+  music.play();
+  card.classList.add("glow");
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.5) {
+      vol += 0.05;
+      music.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+</script>
+
+</body>
+</html>
